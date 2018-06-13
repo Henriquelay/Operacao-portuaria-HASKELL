@@ -25,3 +25,4 @@ atendido navio berco infoPorto = if tempoNavio navio berco infoPorto >= abs(thir
                                 else False
 
 filaNavios listaNavios = [ listaNavios!!x | x<-[] ]  --sort??? Slides aula 15
+hafhah
