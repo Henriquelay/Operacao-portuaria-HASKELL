@@ -1,4 +1,6 @@
-module Modulos where
+module ModuloNListas where
+
+--Primero múdulo. Aqui serão guardadas as funções que não dizem respeito a listas.
 
 filter xs pred = [x|x<-xs,pred]
 
@@ -14,3 +16,4 @@ third3 (x,y,z) = z
 
 --tempo do navio x no berco y
 tempoNavio navio berco infoPorto = (infoPorto!!(first3 berco -1))!!(first4 navio -1)
+

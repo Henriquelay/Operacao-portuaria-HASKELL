@@ -1,8 +1,9 @@
 -- {[== -- == -- == -- == -- == -- == -- == -- == -- == -- == -- == -- ==]} --
 -- {(Trabalho computacional, UFES PROG1 2018/1 Profa Maria Claudia Silva Boeres)} --
 -- {(Dupla formada por Henrique Coutinho Layber e Vitor Brunoro)} --
--- Script principal
-import Modulos
+-- Script principal. Aqui será guardado as funções que o trabalho pede apenas, entre poucas outras coisas.
+import ModuloNListas
+import ModuloListas
 
 type Navio = (Int,Int,Int,Int)  {- ID, chegada, partida, quantidade -}
 type Berco = (Int,Int,Int)      {- ID, abertura, fechamento -}
@@ -22,3 +23,5 @@ tnaviosAlocadosBerco = [tnaviosAlocadosBerco1, tnaviosAlocadosBerco2]
 atendido navio berco infoPorto = if tempoNavio navio berco infoPorto >= abs(third4 navio - second4 navio) && tempoNavio navio berco infoPorto /= 0
                                 then True
                                 else False
+
+filaNavios listaNavios = [ listaNavios!!x | x<-[] ]  --sort??? Slides aula 15
