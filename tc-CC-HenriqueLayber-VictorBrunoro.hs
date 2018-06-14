@@ -7,7 +7,7 @@ import ModuloListas
 
 type Navio = (Int,Int,Int,Int)  {- ID, chegada, partida, quantidade -}
 type Berco = (Int,Int,Int)      {- ID, abertura, fechamento -}
-{- infoPorto [[Int, Int...], [Int, Int...]...] -}{- [berço1[TempoNavio1 TempoNavio2...],berço2[Temponavio1, TempoNavio2]...] -}
+--type Porto = [Int..] {- [berço1[TempoNavio1 TempoNavio2...],berço2[Temponavio1, TempoNavio2...]] -}
 
 
 {- Dados copiados do exemplo do PDF, a propósito de testes -}
@@ -24,5 +24,10 @@ atendido navio berco infoPorto = if tempoNavio navio berco infoPorto >= abs(thir
                                 then True
                                 else False
 
-filaNavios listaNavios = [ listaNavios!!x | x<-[] ]  --sort??? Slides aula 15
-hafhah
+filaNavios listaNavios = mergesortFila listaNavios
+
+{- tempoOcioso berco naviosAlocados infoPorto
+                                            |tempoBerco berco - tempoNavios < 0 = 0
+                                            |otherwise = tempoBerco berco - tempoNavios
+                                                where
+                                                 infoporto = tinfoPorto -}
