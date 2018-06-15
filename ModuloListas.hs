@@ -6,11 +6,18 @@ import ModuloNListas
 --seleciona o menor elemento
 menorElem xs
             | null (tail xs) || null xs = xs   
-            | otherwise = if xs!!0 > xs!!(length xs -1)
+            | otherwise = if xs!!0 > xs!!(tamInd xs)
                             then menorElem (tail xs)
                             else menorElem (init xs)
 
-filter xs pred = [x|x<-xs,pred]
+maiorElem xs
+            | null (tail xs) || null xs = xs   
+            | otherwise = if xs!!0 < xs!!(tamInd xs )
+                            then menorElem (tail xs)
+                            else menorElem (init xs)                            
+
+--tamanho indice (para usar em list comprehension)
+tamInd xs = length xs - 1
 
 --mergesort
 intercala xs ys = if (null xs) || (null ys)
@@ -28,7 +35,7 @@ mergesortFila xs = if null (tail xs)
                     k = div (length xs) 2
 
 --id do navio dentro de naviosAlocadosBercoX
-idsNavioAlocado naviosAlocados = [first4 ((second2 naviosAlocados)!!x) | x<-[0..length (second2 naviosAlocados) -1]]
+idsNavioAlocado naviosAlocados = [first4 ((second2 naviosAlocados)!!x) | x<-[0..tamInd (second2 naviosAlocados)]]
 --id do berco dentro de naviosAlocadosBercoX
 idBercoAlocado naviosAlocados = first3 (first2 naviosAlocados)
 --lista de tempos dos navios usando naviosAlocadosBercoX
@@ -37,3 +44,9 @@ listaTemposNavios naviosAlocados infoPorto = infoPorto!!(fromInteger(idBercoAloc
 selecAlocados naviosAlocados infoPorto = [(listaTemposNavios naviosAlocados infoPorto)!!(fromInteger(x -1)) | x<-(idsNavioAlocado naviosAlocados)]
 --tempo de atendimento para a fila de navios
 tempoGastoNavAloc naviosAlocados infoPorto = sum (selecAlocados naviosAlocados infoPorto)
+
+--lista de tempos de todos os berços
+tempoGastoTdsBercos listaBercos naviosAlocadosBercos infoPorto = [tempoGastoNavAloc (naviosAlocadosBercos!!x) infoPorto | x <-[0..tamInd naviosAlocadosBercos]]
+--lista de temposOciosos de todos os berços
+tempoOciosoTdsBercos listaBercos naviosAlocadosBercos infoPorto = [ tempoOcioso (listaBercos!!x) (naviosAlocadosBercos!!x) infoPorto | x<-[0..tamInd listaBercos]]
+                                            

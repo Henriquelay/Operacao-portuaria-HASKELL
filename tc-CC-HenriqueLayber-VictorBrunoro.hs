@@ -30,3 +30,5 @@ tempoOcioso berco naviosAlocados infoPorto = if tempoBerco berco <= tempoGastoNa
                                                 then 0
                                                 else tempoBerco berco - tempoGastoNavAloc naviosAlocados infoPorto
 --assumindo que o berco digitado manualmente corresponde ao berco de naviosAlocados
+
+bercoOcioso bercos naviosAlocadosBerco infoPorto = [first3 (bercos!!x) | x<-[0..tamInd bercos]]
