@@ -1,20 +1,23 @@
 module ModuloListas where
 import ModuloNListas
+import Data.List
 
 --Segundo múdulo. Aqui serão guardadas as funções que dizem respeito a listas.
 
 --seleciona o menor elemento
 menorElem xs
             | null (tail xs) || null xs = xs   
+            | xs!!0 == xs!!(tamInd xs) = (head xs) : (menorElem (tail xs))
             | otherwise = if xs!!0 > xs!!(tamInd xs)
                             then menorElem (tail xs)
                             else menorElem (init xs)
 
 maiorElem xs
-            | null (tail xs) || null xs = xs   
-            | otherwise = if xs!!0 < xs!!(tamInd xs )
-                            then menorElem (tail xs)
-                            else menorElem (init xs)                            
+            | null xs || null (tail xs) = xs
+            | xs!!0 == xs!!(tamInd xs) = (head xs) : (maiorElem (tail xs))
+            | otherwise = if xs!!0 < xs!!(tamInd xs)
+                            then maiorElem (tail xs)
+                            else maiorElem (init xs)                            
 
 --tamanho indice (para usar em list comprehension)
 tamInd xs = length xs - 1
@@ -47,6 +50,3 @@ tempoGastoNavAloc naviosAlocados infoPorto = sum (selecAlocados naviosAlocados i
 
 --lista de tempos de todos os berços
 tempoGastoTdsBercos listaBercos naviosAlocadosBercos infoPorto = [tempoGastoNavAloc (naviosAlocadosBercos!!x) infoPorto | x <-[0..tamInd naviosAlocadosBercos]]
---lista de temposOciosos de todos os berços
-tempoOciosoTdsBercos listaBercos naviosAlocadosBercos infoPorto = [ tempoOcioso (listaBercos!!x) (naviosAlocadosBercos!!x) infoPorto | x<-[0..tamInd listaBercos]]
-                                            
