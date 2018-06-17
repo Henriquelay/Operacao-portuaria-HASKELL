@@ -22,6 +22,8 @@ maiorElem xs
 --tamanho indice (para usar em list comprehension)
 tamInd xs = length xs - 1
 
+indX xs = [0..tamInd xs]
+
 --mergesort
 intercala xs ys = if (null xs) || (null ys)
     then xs ++ ys
@@ -38,7 +40,7 @@ mergesortFila xs = if null (tail xs)
                     k = div (length xs) 2
 
 --id do navio dentro de naviosAlocadosBercoX
-idsNavioAlocado naviosAlocados = [first4 ((second2 naviosAlocados)!!x) | x<-[0..tamInd (second2 naviosAlocados)]]
+idsNavioAlocado naviosAlocados = [first4 ((second2 naviosAlocados)!!x) | x<-IndX (second2 naviosAlocados)]
 --id do berco dentro de naviosAlocadosBercoX
 idBercoAlocado naviosAlocados = first3 (first2 naviosAlocados)
 --lista de tempos dos navios usando naviosAlocadosBercoX
@@ -49,4 +51,4 @@ selecAlocados naviosAlocados infoPorto = [(listaTemposNavios naviosAlocados info
 tempoGastoNavAloc naviosAlocados infoPorto = sum (selecAlocados naviosAlocados infoPorto)
 
 --lista de tempos de todos os berços
-tempoGastoTdsBercos listaBercos naviosAlocadosBercos infoPorto = [tempoGastoNavAloc (naviosAlocadosBercos!!x) infoPorto | x <-[0..tamInd naviosAlocadosBercos]]
+tempoGastoTdsBercos listaBercos naviosAlocadosBercos infoPorto = [tempoGastoNavAloc (naviosAlocadosBercos!!x) infoPorto | x <-indX naviosAlocadosBercos]

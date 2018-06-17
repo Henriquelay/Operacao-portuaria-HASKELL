@@ -32,7 +32,12 @@ tempoOcioso berco naviosAlocados infoPorto = if tempoBerco berco <= tempoGastoNa
                                                 else tempoBerco berco - tempoGastoNavAloc naviosAlocados infoPorto
 --assumindo que o berco digitado manualmente corresponde ao berco de naviosAlocados
 
-bercoOcioso listaBercos naviosAlocadosBercos infoPorto =map (+1) (elemIndices (maximum (tempoOciosoTdsBercos listaBercos naviosAlocadosBercos infoPorto)) (tempoOciosoTdsBercos listaBercos naviosAlocadosBercos infoPorto))
-
+bercoOcioso listaBercos naviosAlocadosBercos infoPorto = map (+1) (elemIndices (maximum (tempoOciosoTdsBercos listaBercos naviosAlocadosBercos infoPorto)) (tempoOciosoTdsBercos listaBercos naviosAlocadosBercos infoPorto))
 --lista de temposOciosos de todos os berços --teve de vir pra essa lista pois usa ''tempoOcioso'' e os módulos não importam funções da Main
-tempoOciosoTdsBercos listaBercos naviosAlocadosBercos infoPorto = [ tempoOcioso (listaBercos!!x) (naviosAlocadosBercos!!x) infoPorto | x<-[0..tamInd listaBercos]] 
+tempoOciosoTdsBercos listaBercos naviosAlocadosBercos infoPorto = [ tempoOcioso (listaBercos!!x) (naviosAlocadosBercos!!x) infoPorto | x<-indX listaBercos] 
+
+naviosCandidatosBerco listaBercos listaNavios infoPorto
+                                                        | null xs || null (tail xs) = 0
+                                                        | otherwise = [ x | BercInd<-indX xs, 
+
+                                                                
