@@ -1,6 +1,7 @@
 -- {[== -- == -- == -- == -- == -- == -- == -- == -- == -- == -- == -- ==]} --
 -- {(Trabalho computacional, UFES PROG1 2018/1 Profa Maria Claudia Silva Boeres)} --
 -- {(Dupla formada por Henrique Coutinho Layber e Vitor Brunoro)} --
+
 -- Script principal. Aqui será guardado as funções que o trabalho pede apenas, entre poucas outras coisas.
 import ModuloNListas
 import ModuloListas
@@ -12,8 +13,11 @@ type Berco = (Int,Int,Int)      {- ID, abertura, fechamento -}
 
 
 {- Dados copiados do exemplo do PDF, a propósito de testes -}
+tlistaNavios::[(Int,Int,Int,Int)]
 tlistaNavios = [(1 , 5 , 16 , 30) , (2 , 6 , 18 , 30) , (3 , 3 , 12 , 50) , (4 , 4 , 22 , 50) , (5 , 11 , 20 , 80)]
+tlistaBercos::[(Int,Int,Int)]
 tlistaBercos = [(1 , 4 , 20) , (2 , 3 , 18)]
+tinfoPorto::[[Int]]
 tinfoPorto = [[1 , 6 , 4 , 4 , 6], [2 , 0 , 1 , 0 , 5]]
 tnaviosAlocadosBerco1 = ((1 , 4 , 20) , [(4 , 4 , 22 , 50) , (5 , 11 , 20 , 80)])
 tnaviosAlocadosBerco2 = ((2 , 3 , 18) , [(3 , 3 , 12 , 50) , (1 , 5 , 16 , 30)])
@@ -21,7 +25,7 @@ tnaviosAlocadosBerco = [tnaviosAlocadosBerco1 , tnaviosAlocadosBerco2]
 {- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
 
 --atendido:: Navio -> Berco -> [a] -> Bool {- \/ \/ \/ \/ seleciono o tempo do berço a esse navio correto da lista de informações do porto -}
-atendido navio berco infoPorto = if tempoNavio navio berco infoPorto >= abs(third4 navio - second4 navio) && tempoNavio navio berco infoPorto /= 0
+atendido navio berco infoPorto = if tempoCargaNavio navio berco infoPorto >= abs(third4 navio - second4 navio) && tempoCargaNavio navio berco infoPorto /= 0
                                 then True
                                 else False
 
@@ -34,10 +38,8 @@ tempoOcioso berco naviosAlocados infoPorto = if tempoBerco berco <= tempoGastoNa
 
 bercoOcioso listaBercos naviosAlocadosBercos infoPorto = map (+1) (elemIndices (maximum (tempoOciosoTdsBercos listaBercos naviosAlocadosBercos infoPorto)) (tempoOciosoTdsBercos listaBercos naviosAlocadosBercos infoPorto))
 --lista de temposOciosos de todos os berços --teve de vir pra essa lista pois usa ''tempoOcioso'' e os módulos não importam funções da Main
-tempoOciosoTdsBercos listaBercos naviosAlocadosBercos infoPorto = [ tempoOcioso (listaBercos!!x) (naviosAlocadosBercos!!x) infoPorto | x<-indX listaBercos] 
+tempoOciosoTdsBercos listaBercos naviosAlocadosBercos infoPorto = [ tempoOcioso (listaBercos!!x) (naviosAlocadosBercos!!x) infoPorto | x<-(indices listaBercos)] 
 
 naviosCandidatosBerco listaBercos listaNavios infoPorto
-                                                        | null xs || null (tail xs) = 0
-                                                        | otherwise = [ x | BercInd<-indX xs, 
-
-                                                                
+                                                        | null listaBercos || null listaNavios = []
+                                                        | otherwise = [ ((listaBercos!!berco),listaNaviosPos) | berco<-(indices listaBercos),y<-(indices listaNavios), atendido listaNavios]

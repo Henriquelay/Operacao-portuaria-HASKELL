@@ -1,8 +1,11 @@
+-- {[== -- == -- == -- == -- == -- == -- == -- == -- == -- == -- == -- ==]} --
+-- {(Trabalho computacional, UFES PROG1 2018/1 Profa Maria Claudia Silva Boeres)} --
+-- {(Dupla formada por Henrique Coutinho Layber e Vitor Brunoro)} --
+
+--Segundo múdulo. Aqui serão guardadas as funções que dizem respeito a listas.
 module ModuloListas where
 import ModuloNListas
 import Data.List
-
---Segundo múdulo. Aqui serão guardadas as funções que dizem respeito a listas.
 
 --seleciona o menor elemento
 menorElem xs
@@ -22,7 +25,7 @@ maiorElem xs
 --tamanho indice (para usar em list comprehension)
 tamInd xs = length xs - 1
 
-indX xs = [0..tamInd xs]
+indices xs = [0..tamInd xs]
 
 --mergesort
 intercala xs ys = if (null xs) || (null ys)
@@ -40,7 +43,7 @@ mergesortFila xs = if null (tail xs)
                     k = div (length xs) 2
 
 --id do navio dentro de naviosAlocadosBercoX
-idsNavioAlocado naviosAlocados = [first4 ((second2 naviosAlocados)!!x) | x<-IndX (second2 naviosAlocados)]
+idsNavioAlocado naviosAlocados = [first4 ((second2 naviosAlocados)!!x) | x<-(indices (second2 naviosAlocados))]
 --id do berco dentro de naviosAlocadosBercoX
 idBercoAlocado naviosAlocados = first3 (first2 naviosAlocados)
 --lista de tempos dos navios usando naviosAlocadosBercoX
@@ -51,4 +54,4 @@ selecAlocados naviosAlocados infoPorto = [(listaTemposNavios naviosAlocados info
 tempoGastoNavAloc naviosAlocados infoPorto = sum (selecAlocados naviosAlocados infoPorto)
 
 --lista de tempos de todos os berços
-tempoGastoTdsBercos listaBercos naviosAlocadosBercos infoPorto = [tempoGastoNavAloc (naviosAlocadosBercos!!x) infoPorto | x <-indX naviosAlocadosBercos]
+tempoGastoTdsBercos listaBercos naviosAlocadosBercos infoPorto = [tempoGastoNavAloc (naviosAlocadosBercos!!x) infoPorto | x <-(indices naviosAlocadosBercos)]
