@@ -45,4 +45,8 @@ naviosCandidatosBerco listaBercos listaNavios infoPorto
                                                         | otherwise = [(listaBercos!!x,naviosCandidatos (listaBercos!!x) listaNavios infoPorto)|x<-(indices listaBercos)]
 
 --navios candidatos de uma lista ao berco x --teve de vir pra essa lista pois usa ''atendido'' e os módulos não importam funções da Main
-naviosCandidatos berco listaNavios infoPorto = [listaNavios!!y |y<-(indices listaNavios), atendido (listaNavios!!y) berco infoPorto]                                                        
+naviosCandidatos berco listaNavios infoPorto = [listaNavios!!y |y<-(indices listaNavios), atendido (listaNavios!!y) berco infoPorto]              
+
+insereNavioBerco navio naviosAlocados infoPorto = if tempoCargaNavio navio <= tempoNavio navio && notElem navio (naviosAlocadosSemBerco naviosAlocados) && tempoOcioso (first2 naviosAlocados) naviosAlocados infoPorto >= tempoNavio navio
+                                                        then (idBerco naviosAlocados, fourth4 navio + sum (map fourth4 (naviosAlocadosSemBerco naviosAlocados)),navio : (naviosAlocadosSemBerco naviosAlocados))
+                                                        else (0,0,[0])

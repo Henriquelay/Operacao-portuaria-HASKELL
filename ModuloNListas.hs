@@ -31,3 +31,9 @@ tempoBerco berco = abs(third3 berco - second3 berco)
 
 --tempo de trabalho do Navio
 tempoNavio navio = abs (third4 navio - second4 navio)
+
+--id do berco em naviosAlocados
+idBerco naviosAlocados = first3(first2 naviosAlocados)
+
+--selecionar os navios alocados de naviosAlocadosBerco
+naviosAlocadosSemBerco naviosAlocados = second2 naviosAlocados

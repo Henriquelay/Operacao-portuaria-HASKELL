@@ -43,11 +43,9 @@ mergesortFila xs = if null (tail xs)
                     k = div (length xs) 2
 
 --id do navio dentro de naviosAlocadosBercoX
-idsNavioAlocado naviosAlocados = [first4 ((second2 naviosAlocados)!!x) | x<-(indices (second2 naviosAlocados))]
---id do berco dentro de naviosAlocadosBercoX
-idBercoAlocado naviosAlocados = first3 (first2 naviosAlocados)
+idsNavioAlocado naviosAlocados = [first4 ((naviosAlocadosSemBerco naviosAlocados)!!x) | x<-(indices (naviosAlocadosSemBerco naviosAlocados))]
 --lista de tempos dos navios usando naviosAlocadosBercoX
-listaTemposNavios naviosAlocados infoPorto = infoPorto!!(fromInteger(idBercoAlocado naviosAlocados -1))
+listaTemposNavios naviosAlocados infoPorto = infoPorto!!(fromInteger(idBerco naviosAlocados -1))
 --selecionados de navios dentro de infoPorto
 selecAlocados naviosAlocados infoPorto = [(listaTemposNavios naviosAlocados infoPorto)!!(fromInteger(x -1)) | x<-(idsNavioAlocado naviosAlocados)]
 --tempo de atendimento para a fila de navios
