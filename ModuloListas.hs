@@ -55,3 +55,4 @@ tempoGastoNavAloc naviosAlocados infoPorto = sum (selecAlocados naviosAlocados i
 
 --lista de tempos de todos os berços
 tempoGastoTdsBercos listaBercos naviosAlocadosBercos infoPorto = [tempoGastoNavAloc (naviosAlocadosBercos!!x) infoPorto | x <-(indices naviosAlocadosBercos)]
+

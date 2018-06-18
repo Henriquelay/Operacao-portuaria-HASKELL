@@ -25,7 +25,7 @@ tnaviosAlocadosBerco = [tnaviosAlocadosBerco1 , tnaviosAlocadosBerco2]
 {- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -}
 
 --atendido:: Navio -> Berco -> [a] -> Bool {- \/ \/ \/ \/ seleciono o tempo do berço a esse navio correto da lista de informações do porto -}
-atendido navio berco infoPorto = if tempoCargaNavio navio berco infoPorto >= abs(third4 navio - second4 navio) && tempoCargaNavio navio berco infoPorto /= 0
+atendido navio berco infoPorto = if tempoCargaNavio navio berco infoPorto <= tempoNavio navio && tempoCargaNavio navio berco infoPorto /= 0
                                 then True
                                 else False
 
@@ -42,4 +42,7 @@ tempoOciosoTdsBercos listaBercos naviosAlocadosBercos infoPorto = [ tempoOcioso 
 
 naviosCandidatosBerco listaBercos listaNavios infoPorto
                                                         | null listaBercos || null listaNavios = []
-                                                        | otherwise = [ ((listaBercos!!berco),listaNaviosPos) | berco<-(indices listaBercos),y<-(indices listaNavios), atendido listaNavios]
+                                                        | otherwise = [(listaBercos!!x,naviosCandidatos (listaBercos!!x) listaNavios infoPorto)|x<-(indices listaBercos)]
+
+--navios candidatos de uma lista ao berco x --teve de vir pra essa lista pois usa ''atendido'' e os módulos não importam funções da Main
+naviosCandidatos berco listaNavios infoPorto = [listaNavios!!y |y<-(indices listaNavios), atendido (listaNavios!!y) berco infoPorto]                                                        
