@@ -5,7 +5,10 @@
 --Segundo múdulo. Aqui serão guardadas as funções que dizem respeito a listas.
 module ModuloListas where
 import ModuloNListas
-import Data.List                           
+import Data.List      
+
+type Navio = (Int,Int,Int,Int)  {- ID, chegada, partida, quantidade -}
+type Berco = (Int,Int,Int)      {- ID, abertura, fechamento -}
 
 --tamanho indice (para usar em list comprehension)
 tamInd xs = length xs - 1
@@ -27,15 +30,20 @@ mergesortFila xs = if null (tail xs)
                     n = drop k xs
                     k = div (length xs) 2
 
---id do navio dentro de naviosAlocadosBercoX
-idsNavioAlocado naviosAlocados = [first4 ((naviosAlocadosSemBerco naviosAlocados)!!x) | x<-(indices (naviosAlocadosSemBerco naviosAlocados))]
---lista de tempos dos navios usando naviosAlocadosBercoX
-listaTemposNavios naviosAlocados infoPorto = infoPorto!!(fromInteger(idBerco naviosAlocados -1))
+--ids dos navios dentro de naviosAlocadosBercoX
+idsNavioAlocado::(Berco,[Navio]) -> [Int]
+idsNavioAlocado naviosAlocados = map (first4) naviosAlocados
+--lista de tempos carga dos navios usando naviosAlocadosBercoX
+listaTemposNavios::(Berco,[Navio]) -> [[Int]] -> [Int]
+listaTemposNavios naviosAlocados infoPorto = infoPorto!!(idBerco naviosAlocados -1)
 --selecionados de navios dentro de infoPorto
-selecAlocados naviosAlocados infoPorto = [(listaTemposNavios naviosAlocados infoPorto)!!(fromInteger(x -1)) | x<-(idsNavioAlocado naviosAlocados)]
+selecAlocados::(Berco,[Navio]) -> [[Int]] -> [Int]
+selecAlocados naviosAlocados infoPorto = [(listaTemposNavios naviosAlocados infoPorto)!!(x -1) | x<-(idsNavioAlocado naviosAlocados)]
 --tempo de atendimento para a fila de navios
+tempoGastoNavAloc::(Berco,[Navio]) -> [[Int]] -> Int
 tempoGastoNavAloc naviosAlocados infoPorto = sum (selecAlocados naviosAlocados infoPorto)
 
 --lista de tempos de todos os berços
+tempoGastoTdsBercos::[Berco] -> (Berco,[Navio]) -> [[Int]] -> [Int]
 tempoGastoTdsBercos listaBercos naviosAlocadosBercos infoPorto = [tempoGastoNavAloc (naviosAlocadosBercos!!x) infoPorto | x <-(indices naviosAlocadosBercos)]
 
